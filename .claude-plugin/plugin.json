@@ -1,0 +1,13 @@
+{
+  "name": "fact-reflect",
+  "version": "0.1.0",
+  "description": "Knowledge queue for Claude: extract durable facts from conversations, review them, and send only the approved ones to MemServer (MCP), CLAUDE.md, AGENTS.md or GitHub Copilot instructions.",
+  "author": {
+    "name": "Francesco di Dio",
+    "url": "https://github.com/tabuto"
+  },
+  "homepage": "https://github.com/tabuto/fact-reflect",
+  "repository": "https://github.com/tabuto/fact-reflect",
+  "license": "MIT",
+  "keywords": ["memory", "mcp", "knowledge-graph", "claude-md", "agents-md", "copilot", "reflect"]
+}
