@@ -11,7 +11,7 @@
     {
       "name": "fact-reflect",
       "source": "./",
-      "description": "Knowledge queue: /extract-fact queues durable facts, /reflect lets you choose what goes to MemServer, CLAUDE.md, AGENTS.md or Copilot.",
+      "description": "Knowledge queue: /reflect extracts durable facts, checks them against memory, queues them, and lets you choose what goes to MemServer, CLAUDE.md, AGENTS.md or Copilot.",
       "version": "0.1.0"
     }
   ]

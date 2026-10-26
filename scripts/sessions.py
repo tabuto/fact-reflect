@@ -3,7 +3,7 @@
 
 Claude Code stores transcripts as JSONL under ~/.claude/projects/<slug>/.
 This prints the user/assistant text of sessions modified in the last N days,
-skipping tool calls and sessions already processed by /extract-fact.
+skipping tool calls and sessions already processed by /reflect.
 
   python3 sessions.py --days 7 [--project PATH | --all-projects]
                       [--include-processed] [--max-chars 60000]

@@ -8,7 +8,6 @@ import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FQ = os.path.join(ROOT, "scripts", "fq.py")
-HOOK = os.path.join(ROOT, "hooks", "capture_marker.py")
 
 
 class FactQueueTest(unittest.TestCase):
@@ -77,18 +76,6 @@ class FactQueueTest(unittest.TestCase):
         self.assertEqual(stats["pending"], 0)
         purged = json.loads(self.fq("purge"))
         self.assertEqual(purged["removed"], 2)
-
-    def test_hook_marker(self):
-        self.fq("init")
-        payload = json.dumps({"prompt": "ok\nricorda: il server di backup gira su homelab-01\nfine",
-                              "cwd": self.cwd, "session_id": "abc"})
-        r = subprocess.run([sys.executable, HOOK], input=payload, capture_output=True,
-                           text=True, env=self.env, cwd=self.cwd)
-        self.assertEqual(r.returncode, 0, r.stderr)
-        self.assertIn("queued 1 fact", r.stdout)
-        items = json.loads(self.fq("list", "--json"))
-        self.assertEqual(items[0]["text"], "il server di backup gira su homelab-01")
-        self.assertEqual(items[0]["confidence"], 0.95)
 
 
 if __name__ == "__main__":

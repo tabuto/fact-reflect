@@ -1,6 +1,6 @@
 ---
 name: fact-capture
-description: Queue durable facts about the user (preferences, projects, decisions, people, corrections, conventions) for later review instead of saving them straight to memory. Use when the user says "ricorda:", "remember:", "metti in coda", asks to extract facts from a conversation, or asks to review/flush the knowledge queue (/extract-fact, /reflect).
+description: Queue durable facts about the user (preferences, projects, decisions, people, corrections, conventions) for later review instead of saving them straight to memory. Read by the /reflect command before it extracts, checks and queues facts.
 ---
 
 # fact-capture — the knowledge queue
