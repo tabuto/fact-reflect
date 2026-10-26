@@ -41,8 +41,8 @@ Do **not** queue:
 ## How to phrase a fact
 
 - One atomic fact per item, self-contained, readable without the conversation:
-  "Fra hosts pyspendless3 on PythonAnywhere and deploys via git pull + reload API"
-  — not "it's on PA".
+  "Alex hosts demo-app on Render and deploys via git push + webhook"
+  — not "it's on Render".
 - Name the subject explicitly (the user's name/nickname if known, otherwise "The user").
 - Write in the language the user uses for their memory (default: the conversation language).
 - Keep dates absolute ("since October 2026", not "since last week").

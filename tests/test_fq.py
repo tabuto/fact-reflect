@@ -32,15 +32,15 @@ class FactQueueTest(unittest.TestCase):
 
     def test_add_dedup_and_routing(self):
         out = self.add([
-            {"text": "Fra deploys pyspendless3 on PythonAnywhere", "category": "project"},
+            {"text": "Alex deploys demo-app on Render", "category": "project"},
             {"text": "Always use pnpm instead of npm", "category": "correction"},
-            {"text": "fra deploys pyspendless3 on pythonanywhere!", "category": "project"},
+            {"text": "alex deploys demo-app on render!", "category": "project"},
         ])
         self.assertEqual(len(out["added"]), 2)
         self.assertEqual(len(out["skipped"]), 1)
         dests = {a["text"]: a["destination"] for a in out["added"]}
         self.assertEqual(dests["Always use pnpm instead of npm"], "claude-global")
-        self.assertEqual(dests["Fra deploys pyspendless3 on PythonAnywhere"], "memserver")
+        self.assertEqual(dests["Alex deploys demo-app on Render"], "memserver")
 
     def test_write_agent_file_is_idempotent(self):
         out = self.add([{"text": "Run tests with pytest -q", "category": "convention"}])
@@ -64,7 +64,7 @@ class FactQueueTest(unittest.TestCase):
     def test_copilot_creates_dirs_and_mark_mcp(self):
         out = self.add([{"text": "Use OnPush change detection in Angular components",
                          "category": "convention", "destination": "copilot"},
-                        {"text": "Fra lives in Figline Valdarno", "category": "fact"}])
+                        {"text": "Alex lives in Springfield", "category": "fact"}])
         ids = {a["destination"]: a["id"] for a in out["added"]}
         self.fq("write", "copilot", ids["copilot"])
         self.assertTrue(os.path.exists(os.path.join(self.cwd, ".github", "copilot-instructions.md")))
@@ -80,14 +80,14 @@ class FactQueueTest(unittest.TestCase):
 
     def test_hook_marker(self):
         self.fq("init")
-        payload = json.dumps({"prompt": "ok\nricorda: il MemServer gira su hp650\nfine",
+        payload = json.dumps({"prompt": "ok\nricorda: il server di backup gira su homelab-01\nfine",
                               "cwd": self.cwd, "session_id": "abc"})
         r = subprocess.run([sys.executable, HOOK], input=payload, capture_output=True,
                            text=True, env=self.env, cwd=self.cwd)
         self.assertEqual(r.returncode, 0, r.stderr)
         self.assertIn("queued 1 fact", r.stdout)
         items = json.loads(self.fq("list", "--json"))
-        self.assertEqual(items[0]["text"], "il MemServer gira su hp650")
+        self.assertEqual(items[0]["text"], "il server di backup gira su homelab-01")
         self.assertEqual(items[0]["confidence"], 0.95)
 
 
